@@ -6,5 +6,5 @@ type ChatCard struct {
 
 type CardsV2 struct {
 	CardId string `json:"cardId"`
-	Card   Card   `json:"card"`
+	Card   *Card  `json:"card"`
 }
