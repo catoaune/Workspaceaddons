@@ -35,6 +35,7 @@ func (b *ButtonList) AddButton() *Button {
 
 func (b *Button) AddOnClick(url string) *OnClick {
 	var onClick OnClick
+	b.Text = "Someone is outside"
 	b.OnClick = &onClick
 	return &onClick
 }
