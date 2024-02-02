@@ -225,6 +225,7 @@
     },
     "openLink": {
       "$id": "/properties/openLink",
+      "type": "object",
       "description": "Opens a URL",
       "required": ["url"],
       "properties": {

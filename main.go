@@ -17,8 +17,33 @@ func (c *Card) AddSection(title string) *Section {
 
 func (s *Section) AddWidget() *Widget {
 	var widget Widget
+	s.Widgets = append(s.Widgets, widget)
+	return &s.Widgets[len(s.Widgets)-1]
+}
 
-	return &widget
+func (w *Widget) AddButtonList() *ButtonList {
+	var buttonList ButtonList
+	w.ButtonList = &buttonList
+	return &buttonList
+}
+
+func (b *ButtonList) AddButton() *Button {
+	var button Button
+	b.Buttons = append(b.Buttons, button)
+	return &button
+}
+
+func (b *Button) AddOnClick(url string) *OnClick {
+	var onClick OnClick
+	b.OnClick = &onClick
+	return &onClick
+}
+
+func (o *OnClick) AddOpenLink(url string) *OpenLink {
+	var openLink OpenLink
+	openLink.Url = url
+	o.OpenLink = &openLink
+	return &openLink
 }
 
 func CreateChatCard(title string) *ChatCard {
@@ -26,6 +51,11 @@ func CreateChatCard(title string) *ChatCard {
 	var cardsv2 CardsV2
 	card := CreateCard(title)
 	section := card.AddSection("Someone pressed the doorbell")
+	w := section.AddWidget()
+	bl := w.AddButtonList()
+	b := bl.AddButton()
+	oc := b.AddOnClick("https://google.com")
+	oc.AddOpenLink("https://google.com")
 	cardsv2.CardId = "Doorbell"
 	cardsv2.Card = card
 	chatCard.CardsV2 = append(chatCard.CardsV2, cardsv2)

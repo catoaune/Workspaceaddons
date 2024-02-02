@@ -115,7 +115,7 @@ type Button struct {
 	Icon *Icon `json:"icon,omitempty"`
 
 	// The onClick action of the button.
-	OnClick OnClick `json:"onClick"`
+	OnClick *OnClick `json:"onClick"`
 
 	// The text of the button.
 	Text string `json:"text"`
@@ -797,7 +797,7 @@ type OnClick struct {
 	OpenDynamicLinkAction *Action `json:"openDynamicLinkAction,omitempty"`
 
 	// This onClick triggers an open link action if specified.
-	OpenLink OpenLink `json:"openLink,omitempty"`
+	OpenLink *OpenLink `json:"openLink,omitempty"`
 }
 
 type OpenCreatedDraftActionMarkup struct {
@@ -810,7 +810,38 @@ type OpenCreatedDraftActionMarkup struct {
 }
 
 // Opens a URL
-type OpenLink interface{}
+// type OpenLink interface{}
+
+// Opens a URL
+type OpenLink struct {
+	// OnClose corresponds to the JSON schema field "onClose".
+	OnClose *OpenLinkOnClose `json:"onClose,omitempty" yaml:"onClose,omitempty" mapstructure:"onClose,omitem
+pty"`
+
+	// When an onClick opens a link, then the client can either open it as a
+	//  full size (window if that is the frame used by the client), or an
+	//  overlay (such as a pop-up). The implementation depends on the client
+	// platform capabilities, and the value selected may be ignored if the
+	// client does not support it. FULL_SIZE is supported by all clients.
+	OpenAs *OpenLinkOpenAs `json:"openAs,omitempty" yaml:"openAs,omitempty" mapstructure:"openAs,omitempty"`
+
+	// The URL to open.
+	Url string `json:"url" yaml:"url" mapstructure:"url"`
+}
+
+type OpenLinkOnClose string
+
+const (
+	OpenLinkOnCloseNOTHING OpenLinkOnClose = "NOTHING"
+	OpenLinkOnCloseRELOAD  OpenLinkOnClose = "RELOAD"
+)
+
+type OpenLinkOpenAs string
+
+const (
+	OpenLinkOpenAsFULLSIZE OpenLinkOpenAs = "FULL_SIZE"
+	OpenLinkOpenAsOVERLAY  OpenLinkOpenAs = "OVERLAY"
+)
 
 // An object containing a map of defined parameter data for use by the add-on.
 type Parameters interface{}
