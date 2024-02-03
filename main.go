@@ -52,11 +52,11 @@ func CreateChatCard(title string) *ChatCard {
 	var cardsv2 CardsV2
 	card := CreateCard(title)
 	section := card.AddSection("Someone pressed the doorbell")
-	w := section.AddWidget()
-	bl := w.AddButtonList()
-	b := bl.AddButton()
-	oc := b.AddOnClick("https://google.com")
-	oc.AddOpenLink("https://google.com")
+	section.AddWidget().
+		AddButtonList().
+		AddButton().
+		AddOnClick("https://google.com").
+		AddOpenLink("https://google.com")
 	cardsv2.CardId = "Doorbell"
 	cardsv2.Card = card
 	chatCard.CardsV2 = append(chatCard.CardsV2, cardsv2)
