@@ -12,7 +12,7 @@ func (c *Card) AddSection(title string) *Section {
 	var section Section
 	section.Header = &title
 	c.Sections = append(c.Sections, section)
-	return &section
+	return &c.Sections[len(c.Sections)-1]
 }
 
 func (s *Section) AddWidget() *Widget {
@@ -57,7 +57,6 @@ func CreateChatCard(title string) *ChatCard {
 		AddButton().
 		AddOnClick("https://google.com").
 		AddOpenLink("https://google.com")
-	card.Sections = append(card.Sections, *section)
 	cardsv2.CardId = "Doorbell"
 	cardsv2.Card = card
 	chatCard.CardsV2 = append(chatCard.CardsV2, cardsv2)
