@@ -57,6 +57,7 @@ func CreateChatCard(title string) *ChatCard {
 		AddButton().
 		AddOnClick("https://google.com").
 		AddOpenLink("https://google.com")
+	card.Sections = append(card.Sections, *section)
 	cardsv2.CardId = "Doorbell"
 	cardsv2.Card = card
 	chatCard.CardsV2 = append(chatCard.CardsV2, cardsv2)
