@@ -30,7 +30,7 @@ func (w *Widget) AddButtonList() *ButtonList {
 func (b *ButtonList) AddButton() *Button {
 	var button Button
 	b.Buttons = append(b.Buttons, button)
-	return &button
+	return &b.Buttons[len(b.Buttons)-1]
 }
 
 func (b *Button) AddOnClick(url string) *OnClick {
