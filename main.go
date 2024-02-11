@@ -33,9 +33,9 @@ func (b *ButtonList) AddButton() *Button {
 	return &b.Buttons[len(b.Buttons)-1]
 }
 
-func (b *Button) AddOnClick(url string) *OnClick {
+func (b *Button) AddOnClick(label string) *OnClick {
 	var onClick OnClick
-	b.Text = "Someone is outside"
+	b.Text = label
 	b.OnClick = &onClick
 	return &onClick
 }
@@ -47,6 +47,7 @@ func (o *OnClick) AddOpenLink(url string) *OpenLink {
 	return &openLink
 }
 
+/*
 func CreateChatCard(title string) *ChatCard {
 	var chatCard ChatCard
 	var cardsv2 CardsV2
@@ -62,3 +63,4 @@ func CreateChatCard(title string) *ChatCard {
 	chatCard.CardsV2 = append(chatCard.CardsV2, cardsv2)
 	return &chatCard
 }
+*/
