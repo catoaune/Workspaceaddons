@@ -1,5 +1,17 @@
 package WorkspaceAddOns
 
+func (ra *RenderAction) CreateAction() *NavigationAction {
+	var action NavigationAction
+	ra.Action = &action
+	return ra.Action
+}
+
+func (na *NavigationAction) AddNavigation() *Navigation {
+	navigation := new(Navigation)
+	na.Navigations = append(na.Navigations, *navigation)
+	return &na.Navigations[len(na.Navigations)-1]
+}
+
 func CreateCard(title string) *Card {
 	var card Card
 	var header CardHeader
@@ -19,6 +31,30 @@ func (s *Section) AddWidget() *Widget {
 	var widget Widget
 	s.Widgets = append(s.Widgets, widget)
 	return &s.Widgets[len(s.Widgets)-1]
+}
+
+func (w *Widget) AddTextInput(name, label, value string) *TextInput {
+	var textInput TextInput
+	textInput.Name = name
+	textInput.Label = &label
+	textInput.Value = &value
+	w.TextInput = &textInput
+	return w.TextInput
+}
+
+func (w *Widget) AddTextParagraph(text string) *TextParagraph {
+	var textParagraph TextParagraph
+	textParagraph.Text = text
+	w.TextParagraph = &textParagraph
+	return w.TextParagraph
+}
+
+func (w *Widget) AddImage(altText, url string) *Image {
+	var image Image
+	image.AltText = &altText
+	image.ImageUrl = url
+	w.Image = &image
+	return w.Image
 }
 
 func (w *Widget) AddButtonList() *ButtonList {
@@ -46,21 +82,3 @@ func (o *OnClick) AddOpenLink(url string) *OpenLink {
 	o.OpenLink = &openLink
 	return &openLink
 }
-
-/*
-func CreateChatCard(title string) *ChatCard {
-	var chatCard ChatCard
-	var cardsv2 CardsV2
-	card := CreateCard(title)
-	section := card.AddSection("Someone pressed the doorbell")
-	section.AddWidget().
-		AddButtonList().
-		AddButton().
-		AddOnClick("https://google.com").
-		AddOpenLink("https://google.com")
-	cardsv2.CardId = "Doorbell"
-	cardsv2.Card = card
-	chatCard.CardsV2 = append(chatCard.CardsV2, cardsv2)
-	return &chatCard
-}
-*/
