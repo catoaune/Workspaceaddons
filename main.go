@@ -82,3 +82,99 @@ func (o *OnClick) AddOpenLink(url string) *OpenLink {
 	o.OpenLink = &openLink
 	return &openLink
 }
+
+// Not generated automatically since Action is used in several places with different meaning
+type FormAction struct {
+	Function string `json:"function,omitempty"`
+}
+
+// Wrapper since the payload must start with renderAction when it is a response to a form submit
+type RenderActionWrapper struct {
+	RenderAction *RenderAction `json:"renderActions,omitempty"`
+}
+
+func (ra *RenderActionWrapper) AddRenderAction() *RenderAction {
+	var renderAction RenderAction
+	ra.RenderAction = &renderAction
+	return &renderAction
+}
+
+// Helper functions
+func (r *RenderAction) CreateAction() *Action {
+	var action Action
+	r.Action = &action
+	return &action
+}
+
+func (a *Action) AddNavigation() *Navigation {
+	navigation := new(Navigation)
+	a.Navigations = append(a.Navigations, *navigation)
+	return &a.Navigations[len(a.Navigations)-1]
+}
+
+func (a *Action) AddNotification(text string) {
+	var notification Notification
+	notification.Text = &text
+	a.Notification = &notification
+}
+
+func (n *Navigation) AddCard() *Card {
+	var card Card
+	n.PushCard = &card
+	return &card
+}
+
+func (c *Card) AddSection(headerLabel string) *Section {
+	var section Section
+	section.Header = &headerLabel
+	c.Sections = append(c.Sections, section)
+	return &c.Sections[(len(c.Sections) - 1)]
+}
+
+func (c *Card) CreateHeader(imageType string) {
+	var h CardHeader
+	h.ImageType = (*CardHeaderImageType)(&imageType)
+	c.Header = &h
+}
+
+func (s *Section) AddWidget() *Widget {
+	var widget Widget
+	s.Widgets = append(s.Widgets, widget)
+	return &s.Widgets[len(s.Widgets)-1]
+}
+
+func (w *Widget) AddTextInput(name, label, value string) {
+	var textInput TextInput
+	textInput.Name = name
+	textInput.Label = &label
+	textInput.Value = &value
+	w.TextInput = &textInput
+}
+
+func (w *Widget) AddTextParagraph(text string) {
+	var textParagraph TextParagraph
+	textParagraph.Text = text
+	w.TextParagraph = &textParagraph
+}
+
+func (w *Widget) AddImage(altText, url string) {
+	var image Image
+	image.AltText = &altText
+	image.ImageUrl = url
+	w.Image = &image
+}
+
+func (w *Widget) AddButtonList() *ButtonList {
+	var buttonList ButtonList
+	w.ButtonList = &buttonList
+	return &buttonList
+}
+
+func (b *ButtonList) AddSubmitButton(text, url string) {
+	var button Button
+	button.Text = text
+	formAction := new(FormAction)
+	formAction.Function = url
+	button.OnClick.Action = formAction
+	b.Buttons = append(b.Buttons, button)
+}
