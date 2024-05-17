@@ -112,7 +112,7 @@ func (a *Action) AddNavigation() *Navigation {
 	return &a.Navigations[len(a.Navigations)-1]
 }
 
-func (a *Action) AddNotification(text string) {
+func (a *NavigationAction) AddNotification(text string) {
 	var notification Notification
 	notification.Text = &text
 	a.Notification = &notification
