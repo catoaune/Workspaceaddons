@@ -138,6 +138,9 @@ func (b *ButtonList) AddSubmitButton(text, url string) {
 	button.Text = text
 	formAction := new(Action)
 	formAction.Function = url
-	button.OnClick.Action = formAction
+	var onClick OnClick
+	onClick.Action = formAction
+	button.OnClick = &onClick
+	//	button.OnClick.Action = formAction
 	b.Buttons = append(b.Buttons, button)
 }
