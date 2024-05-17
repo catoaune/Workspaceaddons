@@ -2,7 +2,7 @@ package WorkspaceAddOns
 
 func (ra *RenderAction) CreateAction() *NavigationAction {
 	var action NavigationAction
-	action.Link.Url = "https://google.com"
+	action.Link = nil
 	ra.Action = &action
 	return ra.Action
 }
