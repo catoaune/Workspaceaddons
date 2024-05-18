@@ -1,5 +1,9 @@
 package WorkspaceAddOns
 
+import (
+	"encoding/json"
+)
+
 func (ra *RenderAction) CreateAction() *NavigationAction {
 	var action NavigationAction
 	action.Link = OpenLink{}
@@ -144,4 +148,18 @@ func (b *ButtonList) AddSubmitButton(text, url string) {
 	button.OnClick = &onClick
 	//	button.OnClick.Action = formAction
 	b.Buttons = append(b.Buttons, button)
+}
+
+func (na NavigationAction) MarshalJSON() ([]byte, error) {
+	type Alias NavigationAction // Alias for å unngå uendelig rekursiv kall
+	if na.Link.Url == "" {
+		return json.Marshal(struct {
+			Navigations  []Navigation  `json:"navigations,omitempty"`
+			Notification *Notification `json:"notification,omitempty"`
+		}{
+			Navigations:  na.Navigations,
+			Notification: na.Notification,
+		})
+	}
+	return json.Marshal(Alias(na))
 }
