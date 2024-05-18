@@ -2,7 +2,7 @@ package WorkspaceAddOns
 
 func (ra *RenderAction) CreateAction() *NavigationAction {
 	var action NavigationAction
-	action.Link = nil
+	action.Link = OpenLink{}
 	ra.Action = &action
 	return ra.Action
 }
