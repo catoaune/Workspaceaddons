@@ -148,6 +148,23 @@ func (c *Card) AddHeader(imageType string) {
 	c.Header = &h
 }
 
+// Add Fixed Footer to a Card
+func (c *Card) AddFixedFooter() *CardFixedFooterWrapper {
+	var f CardFixedFooterWrapper
+	c.FixedFooter = &f
+	return &f
+}
+
+// Add a button as Primary button in the Fixed Footer
+func (f *CardFixedFooterWrapper) AddPrimaryButton(button Button) {
+	f.PrimaryButton = button
+}
+
+// Add a button as SEcondary button in the Fixed Footer
+func (f *CardFixedFooterWrapper) AddSecondaryButton(button Button) {
+	f.SecondaryButton = button
+}
+
 // Add a Submit Button to a ButtonList
 func (b *ButtonList) AddSubmitButton(text, url string) {
 	var button Button
@@ -174,4 +191,9 @@ func (na NavigationAction) MarshalJSON() ([]byte, error) {
 		})
 	}
 	return json.Marshal(Alias(na))
+}
+
+type CardFixedFooterWrapper struct {
+	PrimaryButton   Button `json:"primaryButton,omitempty"`
+	SecondaryButton Button `json:"secondaryButton,omitempty"`
 }
