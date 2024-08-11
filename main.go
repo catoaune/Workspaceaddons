@@ -156,12 +156,26 @@ func (c *Card) AddFixedFooter() *CardFixedFooterWrapper {
 }
 
 // Add a button as Primary button in the Fixed Footer
-func (f *CardFixedFooterWrapper) AddPrimaryButton(button Button) {
+func (f *CardFixedFooterWrapper) AddPrimaryButton(text, url string) {
+	var button Button
+	button.Text = text
+	formAction := new(Action)
+	formAction.Function = url
+	var onClick OnClick
+	onClick.Action = formAction
+	button.OnClick = &onClick
 	f.PrimaryButton = button
 }
 
 // Add a button as SEcondary button in the Fixed Footer
-func (f *CardFixedFooterWrapper) AddSecondaryButton(button Button) {
+func (f *CardFixedFooterWrapper) AddSecondaryButton(text, url string) {
+	var button Button
+	button.Text = text
+	formAction := new(Action)
+	formAction.Function = url
+	var onClick OnClick
+	onClick.Action = formAction
+	button.OnClick = &onClick
 	f.SecondaryButton = button
 }
 
