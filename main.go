@@ -159,10 +159,10 @@ func (c *Card) AddFixedFooter() *CardFixedFooterWrapper {
 func (f *CardFixedFooterWrapper) AddPrimaryButton(text, url string) {
 	var button Button
 	button.Text = text
-	formAction := new(Action)
-	formAction.Function = url
+	var openLink OpenLink
+	openLink.Url = url
 	var onClick OnClick
-	onClick.Action = formAction
+	onClick.Action = openLink
 	button.OnClick = &onClick
 	f.PrimaryButton = button
 }
@@ -171,10 +171,10 @@ func (f *CardFixedFooterWrapper) AddPrimaryButton(text, url string) {
 func (f *CardFixedFooterWrapper) AddSecondaryButton(text, url string) {
 	var button Button
 	button.Text = text
-	formAction := new(Action)
-	formAction.Function = url
+	var openLink OpenLink
+	openLink.Url = url
 	var onClick OnClick
-	onClick.Action = formAction
+	onClick.Action = openLink
 	button.OnClick = &onClick
 	f.SecondaryButton = button
 }
