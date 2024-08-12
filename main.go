@@ -167,7 +167,7 @@ func (f *CardFixedFooterWrapper) AddPrimaryButton(text, url string) {
 	f.PrimaryButton = button
 }
 
-// Add a button as SEcondary button in the Fixed Footer
+// Add a button as Secondary button in the Fixed Footer
 func (f *CardFixedFooterWrapper) AddSecondaryButton(text, url string) {
 	var button Button
 	button.Text = text
