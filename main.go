@@ -162,7 +162,7 @@ func (f *CardFixedFooterWrapper) AddPrimaryButton(text, url string) {
 	var openLink OpenLink
 	openLink.Url = url
 	var onClick OnClick
-	onClick.Action = openLink
+	onClick.OpenLink = &openLink
 	button.OnClick = &onClick
 	f.PrimaryButton = button
 }
@@ -174,7 +174,7 @@ func (f *CardFixedFooterWrapper) AddSecondaryButton(text, url string) {
 	var openLink OpenLink
 	openLink.Url = url
 	var onClick OnClick
-	onClick.Action = openLink
+	onClick.OpenLink = &openLink
 	button.OnClick = &onClick
 	f.SecondaryButton = button
 }
